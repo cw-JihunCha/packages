@@ -323,14 +323,13 @@ public class ImagePickerDelegate
 
         Intent pickMediaIntent;
         pickMediaIntent =
-                new ActivityResultContracts.PickMultipleVisualMedia()
+                new ActivityResultContracts.PickVisualMedia()
                         .createIntent(
                                 activity,
                                 new PickVisualMediaRequest.Builder()
                                         .setMediaType(
                                                 ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
                                         .build());
-        activity.startActivityForResult(pickMediaIntent, REQUEST_CODE_CHOOSE_MEDIA_FROM_GALLERY);
 
         //    Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
 //
