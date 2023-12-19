@@ -306,7 +306,21 @@ public class ImagePickerDelegate
     }
 
     private void launchPickMediaFromGalleryIntent(Messages.GeneralOptions generalOptions) {
-//        Intent pickMediaIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
+
+        // 이미지와 비디오 파일을 선택할 수 있도록 MIME 유형 설정
+        String[] mimeTypes = {"image/*", "video/*"};
+        pickMediaIntent.setType("*/*");
+        pickMediaIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+
+        // 다중 선택 옵션
+        if (generalOptions.getAllowMultiple() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            pickMediaIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        }
+
+        activity.startActivityForResult(pickMediaIntent, REQUEST_CODE_CHOOSE_MEDIA_FROM_GALLERY);
+
+        //        Intent pickMediaIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //
 //        // MIME 타입을 이미지와 비디오로 설정
 //        pickMediaIntent.setType("*/*");
@@ -321,15 +335,15 @@ public class ImagePickerDelegate
 //        activity.startActivityForResult(pickMediaIntent, REQUEST_CODE_CHOOSE_MEDIA_FROM_GALLERY);
 
 
-        Intent pickMediaIntent;
-        pickMediaIntent =
-                new ActivityResultContracts.PickVisualMedia()
-                        .createIntent(
-                                activity,
-                                new PickVisualMediaRequest.Builder()
-                                        .setMediaType(
-                                                ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
-                                        .build());
+//        Intent pickMediaIntent;
+//        pickMediaIntent =
+//                new ActivityResultContracts.PickVisualMedia()
+//                        .createIntent(
+//                                activity,
+//                                new PickVisualMediaRequest.Builder()
+//                                        .setMediaType(
+//                                                ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+//                                        .build());
 
         //    Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
 //
