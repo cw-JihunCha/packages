@@ -342,6 +342,7 @@ public class ImagePickerPlugin implements FlutterPlugin, ActivityAware, ImagePic
               "no_activity", "image_picker plugin requires a foreground activity.", null));
       return;
     }
+    System.out.println("pickMedia!!!");
     delegate.chooseMediaFromGallery(mediaSelectionOptions, generalOptions, result);
   }
 
