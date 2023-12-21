@@ -306,15 +306,24 @@ public class ImagePickerDelegate
     }
 
     private void launchPickMediaFromGalleryIntent(Messages.GeneralOptions generalOptions) {
-        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//
+//        String[] mimeTypes = {"image/*", "video/*"};
+//        pickMediaIntent.setType("*/*");
+//        pickMediaIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//
+//        if (generalOptions.getAllowMultiple() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//            pickMediaIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//        }
 
-        String[] mimeTypes = {"image/*", "video/*"};
-        pickMediaIntent.setType("*/*");
-        pickMediaIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-
-        if (generalOptions.getAllowMultiple() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            pickMediaIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        }
+        pickMediaIntent =
+                new ActivityResultContracts.PickMultipleVisualMedia()
+                        .createIntent(
+                                activity,
+                                new PickVisualMediaRequest.Builder()
+                                        .setMediaType(
+                                                ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+                                        .build());
 
         activity.startActivityForResult(pickMediaIntent, REQUEST_CODE_CHOOSE_MEDIA_FROM_GALLERY);
 
