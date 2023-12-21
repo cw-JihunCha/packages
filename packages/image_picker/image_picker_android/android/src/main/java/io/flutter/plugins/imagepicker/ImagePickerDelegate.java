@@ -306,7 +306,7 @@ public class ImagePickerDelegate
     }
 
     private void launchPickMediaFromGalleryIntent(Messages.GeneralOptions generalOptions) {
-//        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
 //
 //        String[] mimeTypes = {"image/*", "video/*"};
 //        pickMediaIntent.setType("*/*");
